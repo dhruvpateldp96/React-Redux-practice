@@ -1,0 +1,116 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+$primary-color: #ef5350;
+$secondary-color: #FFC91B;
+$info-color: #3661AC;
+$primary-text-color: #fff;
+$primary-text-color-hover: #000;
+$secondary-text-color: #fff;
+$secondary-text-color-hover: #000;
+$info-text-color: #fff;
+$info-text-color-hover: #000;
+
+$font-size-xsmall: 10px;
+$font-size-small: 12px;
+$font-size-normal: 14px;
+$font-size-large: 16px;
+$font-size-xlarge: 22px;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.button {
+	padding: 6px 12px;
+	border-radius: 2px;
+	-webkit-appearance: none;
+	border: none;
+	&:hover {
+		text-decoration: none;
+		opacity: 0.8;
+	}
+}
+
+.button-primary {
+	background-color: $primary-color;
+	color: $primary-text-color;
+
+	&:hover {
+		color: $primary-text-color-hover;
+	}
+}
+
+.button-secondary {
+	background-color: $secondary-color;
+	color: $primary-text-color;
+
+	&:hover {
+		color: $secondary-text-color-hover;
+	}
+}
+
+.button-info {
+	background-color: $info-color;
+	color: $info-text-color;
+
+	&:hover {
+		color: $info-text-color-hover;
+	}
+}
+
+.button-checkbox {
+	height: 20px;
+}
+
+.button-checkbox-checked {
+	background-color: $info-color;
+}
+
+.button-large {
+	font-size: $font-size-xlarge
+}
+
+.text-heading {
+	font-size: $font-size-xlarge;
+	font-style: italic;
+	border-bottom: 3px solid $primary-color;
+	display: block;
+	border-radius: 2px;
+	font-weight: bold;
+}
+
+.pokemon-name {
+	background-color: #2f2f2f;
+	font-style: italic;
+	color: $primary-text-color;
+	padding: 6px 12px;
+}
+
+.pokemon-status {
+	background-color: #2f2f2f;
+	font-style: italic;
+	color: $primary-text-color;
+	padding: 6px 12px;
+}
+
+.pokemon-stats {
+	.key {
+		font-size: $font-size-large;
+		font-weight: bold;
+	}
+
+	.value {
+		font-size: $font-size-normal;
+	}
+}
+

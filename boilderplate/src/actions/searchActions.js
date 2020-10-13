@@ -1,30 +1,16 @@
-import { LOADING, CREATE_CONTACT, MODAL_STATE, DELETE_CONTACT } from './types';
+import { SEARCH_MOVIE, FETCH_MOVIES, FETCH_MOVIE, LOADING } from './types';
 import axios from 'axios';
 
 // import { APIKey } from '../../../movies-series-info/src/APIKey';
 
 // const dispatch = useDispatch()
 
-export const createContact = (formData) => {
-  return {
-    type: CREATE_CONTACT,
-    payload: formData
-  };
-};
-
-export const deleteContact = (phone) => {
-  return {
-    type: DELETE_CONTACT,
-    payload: phone
-  };
-};
-
-export const changeModalState = () => {
-  return {
-    type: MODAL_STATE,
-  };
-};
-
+// export const searchMovie = (text) => {
+//   return {
+//     type: SEARCH_MOVIE,
+//     payload: text
+//   };
+// };
 
 // export const fetchMovies = (text) => {
 //   return (dispatch) => {

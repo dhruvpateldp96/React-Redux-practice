@@ -14,10 +14,11 @@ const APIKey = 'c951ff1'
 //   };
 // };
 
-export const setSeating = (seatId) => {
+export const setSeating = (movieId, seatId) => {
   return {
     type: SEATING,
-    payload: seatId
+    seatId: seatId,
+    movieId: movieId
   };
 };
 

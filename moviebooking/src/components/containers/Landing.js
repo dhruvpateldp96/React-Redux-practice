@@ -16,12 +16,12 @@ const Landing = () => {
     // }, [])
     // movieList && console.log(movieList)
 
-    const content = movieList.map((movie) => <MovieCard key={movie.imdbID} img={movie.Poster} title={movie.Title} year={movie.Year} id={movie.imdbID}/>)
+    const content = movieList ? movieList.map((movie) => <MovieCard key={movie.imdbID} img={movie.Poster} title={movie.Title} year={movie.Year} id={movie.imdbID}/>) : <h2>Loading</h2>
     
     return (
         <div className="container">
             <div className="row">
-                {movieList && content}
+                {content}
             </div>
         </div>
     )

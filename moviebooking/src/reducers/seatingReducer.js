@@ -38,8 +38,10 @@ export default function(state = initialState, action) {
             if (state.reservedSeating[action.movieId].includes(action.seatId)){
                 newReservedSeating = {...state.reservedSeating, 
                     [action.movieId]: [...state.reservedSeating[action.movieId].filter((seat)=>seat!==action.seatId)]}
+                    //moviekey          //new state without the key
             }else{
                 newReservedSeating = {...state.reservedSeating, [action.movieId]: [...state.reservedSeating[action.movieId], action.seatId]}
+                                                                //key             //array                                   //new seatId
             }
         }else{
             //state doesnt contain info about current movie booking
@@ -48,6 +50,7 @@ export default function(state = initialState, action) {
             // newIncomingBooking[action.movieId] = action.seatId
             
             newReservedSeating = {...state.reservedSeating, [action.movieId]: [action.seatId] }
+                                                            //key               //newSeat
         }
 
         

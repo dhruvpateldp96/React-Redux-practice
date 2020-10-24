@@ -9,14 +9,19 @@ function Navbar() {
         <div className="container">
           <div className="navbar-header">
             <Link className="navbar-brand text-white text-lg brand-text" to="/">
-              Intuit Demo
+              Sellers
             </Link>
+            <Link className="navbar-brand text-white text-lg brand-text" to="/buyer">
+                Buyers
+              </Link>
           </div>
           <div className="navbar-header">
             <SearchBar/>
           </div>
           <ul className="navbar-nav ml-auto text-light d-inline-block">
-            
+            <li className="nav-item d-inline-block mr-4">
+              
+            </li>
             <li className="nav-item d-inline-block mr-4">
               <i className="fab fa-react fa-5x" id="react-logo" />
             </li>

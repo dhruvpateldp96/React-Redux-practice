@@ -1,0 +1,49 @@
+.recom-container {
+  height: 100%;
+  margin-bottom: 15px;
+  margin-top: 0px;
+  padding: 30px;
+  background-color: white;
+}
+
+.recom-intro h1 {
+  font-size: 42px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.recom-intro a {
+  font-size: 42px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: #ca2edb;
+  animation: font-shift infinite 7s alternate;
+  -webkit-animation: font-shift infinite 7s alternate;
+
+}
+
+@-webkit-keyframes font-shift {
+  from {color: #ca2edb;}
+  to {font-color: #2edbca;}
+}
+
+@keyframes font-shift {
+  from {color: #ca2edb;}
+  to {color: #2edbca;}
+}
+
+.recom-buttons {
+  margin: 50px;
+}
+
+.map-toggler {
+    background-color: #742edb;
+}
+
+.map-container {
+  margin-right: 35px;
+}
+
+.google-map {
+  position: relative;
+}

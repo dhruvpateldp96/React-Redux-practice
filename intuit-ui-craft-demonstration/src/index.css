@@ -1,0 +1,50 @@
+.red { background: red; }
+.blue { background: blue; }
+
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.current .icon {
+    font-size: 3em;
+    border-right: 1px solid lightgray;
+}
+
+.current .location {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.current .date, .weekly-forecast-day .date {
+    font-size: 1.25em;
+}
+
+.current .temperature {
+    font-size: 5em;
+}
+
+.weekly-forecast-day {
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+.weekly-forecast-day:last-child {
+    border-bottom: none;
+}
+
+.weekly-forecast-day .icon {
+    font-size: 1.5em;
+}
+
+.weekly-forecast-day .temperature {
+    font-size: 1.25em;
+    line-height: 1.25em;
+}
+
+.weekly-forecast-day .temperature .hi {
+    color: #FF7979;
+}
+
+.weekly-forecast-day .temperature .lo {
+    color: #7979FF;
+}

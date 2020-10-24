@@ -1,0 +1,56 @@
+{
+  "name": "intuit-ui-craft-demonstration",
+  "private": true,
+  "description": "Test Project for Intuit",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "dist/index.html",
+  "author": "Rahat Ahmed",
+  "repository": "rahatarmanahmed/intuit-ui-craft-demonstration",
+  "scripts": {
+    "clean": "rimraf dist",
+    "lint": "eslint src/ test/",
+    "test": "echo 'No tests available.'",
+    "build:js": "browserify src/js/index.js > dist/index.js",
+    "copy": "cpx 'src/index.{html,css}' dist/",
+    "prebuild": "npm run clean && mkdirp dist",
+    "build": "npm run build:js && npm run copy",
+    "pretest": "npm run lint",
+    "prewatch": "npm run copy",
+    "watch": "watchify src/js/index.js -o dist/index.js -dv",
+    "dev": "npm run watch",
+    "prepublish": "npm run test && npm run build"
+  },
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "babel-eslint": "^6.1.2",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
+    "cpx": "^1.3.1",
+    "eslint": "^3.0.1",
+    "eslint-plugin-react": "^5.2.2",
+    "mkdirp": "^0.5.1",
+    "onchange": "^2.5.0",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.9.1",
+    "fetch-jsonp": "^1.0.0",
+    "fetch-ponyfill": "^1.0.0",
+    "lodash": "^4.13.1",
+    "moment": "^2.14.1",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  }
+}

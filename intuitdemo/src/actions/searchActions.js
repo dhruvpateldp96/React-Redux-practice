@@ -1,16 +1,13 @@
-import { SEARCH_MOVIE, FETCH_MOVIES, FETCH_MOVIE, LOADING } from './types';
+import {  PUSH_PROJECT, PUSH_BIDS, LOADING, REMOVE_PROJECT,SHOW_BIDS } from './types';
 import axios from 'axios';
 
-// import { APIKey } from '../../../movies-series-info/src/APIKey';
 
-// const dispatch = useDispatch()
-
-// export const searchMovie = (text) => {
-//   return {
-//     type: SEARCH_MOVIE,
-//     payload: text
-//   };
-// };
+export const pushProject = (project) => {
+  return {
+    type: PUSH_PROJECT,
+    payload: project
+  };
+};
 
 // export const fetchMovies = (text) => {
 //   return (dispatch) => {
@@ -24,21 +21,36 @@ import axios from 'axios';
 //     )
 //     .catch(err => console.log(err));
 //   };
-// };
+// }
 
-// export const fetchMovie = (id) => {
-//   return (dispatch) => {
-//     return axios
-//     .get(`https://www.omdbapi.com/?apikey=${APIKey}&i=${id}`)
-//     .then(response =>
-//       dispatch({
-//         type: FETCH_MOVIE,
-//         payload: response.data
-//       })
-//     )
-//     .catch(err => console.log(err));
-//     };
-// };
+
+export const pushBids = (projectName, bid) => {
+  return {
+    type: PUSH_BIDS,
+    projectName: projectName,
+    bid: bid
+  };
+};
+
+
+export const showBids = (projectName) => {
+  return {
+    type: SHOW_BIDS,
+    projectName: projectName,
+  };
+};
+
+export const removeProject = (projectName) => {
+  return (dispatch) => {
+    dispatch(showBids(projectName))
+    dispatch({
+      type: REMOVE_PROJECT,
+      projectName: projectName,
+    });
+  }
+ 
+};
+
 
 export const setLoading = () => {
   return {

@@ -1,0 +1,25 @@
+.restaurant-list {
+  padding: 20px;
+  padding-top: 0px;
+}
+
+.image img {
+  width: 100px;
+   height: 100px;
+   background-position: center center;
+   background-repeat: no-repeat;
+   overflow: hidden;
+}
+
+.rest-list-container {
+  margin-bottom: 15px;
+  background-color: white;
+}
+
+.extra {
+  color: #2e96db;
+}
+
+.hashtags {
+  display: inline-block;
+}

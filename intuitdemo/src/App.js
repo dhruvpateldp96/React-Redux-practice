@@ -7,7 +7,9 @@ import './App.css';
 import Navbar from './components/layouts/Navbar';
 import Footer from './components/layouts/Footer';
 
-import Landing from './components/containers/Landing';
+import Seller from './components/containers/Seller';
+import Buyer from './components/containers/Buyer';
+import ProjectDetail from './components/containers/ProjectDetail';
 
 import store from './store';
 
@@ -17,8 +19,10 @@ const App = () => {
         <Router>
           <div>
             <Navbar />
-            <Route exact path="/" component={Landing} />
-            {/* <Route exact path="/movie/:id" component={Movie} /> */}
+            <Route exact path="/" component={Seller} />
+            <Route exact path="/buyer" component={Buyer} />
+            <Route exact path="/project/:id" component={ProjectDetail} />
+
             <Footer />
           </div>
         </Router>

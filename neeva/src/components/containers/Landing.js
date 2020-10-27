@@ -78,8 +78,9 @@ const Landing = () => {
         }
     }
     return (
-        <div>
-            <select name="selction" id="selction" onChange={handleChange}> 
+        <div className="container">
+            <h3>Select Type of Resutls</h3>
+            <select name="selction" id="selction" onChange={handleChange} className="btn btn-primary-outlined"> 
                 <option value="All" selected>All</option>
                 <option value="Calendar" >Calendar</option>
                 <option value="Contacts">Contacts</option>

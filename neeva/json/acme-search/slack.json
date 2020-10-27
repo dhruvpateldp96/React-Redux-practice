@@ -11,29 +11,7 @@
           "chatter",
           "lunch"
         ]
-      },{
-        "id": "12345",
-        "channel": "yoylo",
-        "author": "asgasdgagasdgasgd",
-        "message": "Who's up for lunch right now?",
-        "timestamp": "2019-02-26 11:00:00",
-        "matching_terms": [
-          "alice",
-          "john",
-          "lunch"
-        ]
-      },{
-        "id": "12345",
-        "channel": "adsfagd",
-        "author": "sumit",
-        "message": "Who's up for lunch right now?",
-        "timestamp": "2019-02-26 11:00:00",
-        "matching_terms": [
-          "alice",
-          "john",
-          "lunch"
-        ]
-      },
+      }
       {
         "id": "12346",
         "channel": "chatter",

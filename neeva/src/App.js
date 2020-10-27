@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ const App = () => {
           <div>
             <Navbar />
             <Route exact path="/" component={Landing} />
-            {/* <Route exact path="/movie/:id" component={Movie} /> */}
+            {/* <Route exact path="/cal" component={Calendar} /> */}
             <Footer />
           </div>
         </Router>

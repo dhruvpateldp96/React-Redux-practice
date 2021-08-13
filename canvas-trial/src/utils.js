@@ -6,10 +6,11 @@ export const generateShapes = () => {
       id: i.toString(),
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      fill: "blue",
+      // fill: "green",
       radius: 10,
       draggable: true,
       isDragging: false,
+      isDblClick: false
     }
     ));
   

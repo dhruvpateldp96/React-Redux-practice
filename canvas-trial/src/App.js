@@ -1,19 +1,52 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { render } from "react-dom";
-import { Stage, Layer, Circle, Text } from "react-konva";
+import { Stage, Layer, Circle, Text, Shape, Image } from "react-konva";
 import 'lodash.combinations';
 import _ from "lodash";
 import Edge from "./Edge"
 import { generateShapes, generateEdges } from "./utils";
-
+import useImage from "use-image";
 
 const INITIAL_STATE = generateShapes();
 const INITIAL_EDGE_STATE = generateEdges(INITIAL_STATE);
 
+
+const distance = (curPoint)=>(p) => {
+  return Math.sqrt(Math.pow(curPoint.x - p.x, 2) + Math.pow(curPoint.y - p.y, 2))
+}
+
+const findClosestStar = (curPoint, stars) => {
+  const distFromCurPoint = distance(curPoint)
+  const tempStars = stars.filter(star => star.fill != "transparent");
+  const closest = tempStars.reduce((a, b) => (distFromCurPoint(a) < distFromCurPoint(b)) ? a : b);
+  return closest
+}
+
 const App = () => {
   const [stars, setStars] = React.useState(INITIAL_STATE);
   const [edges, setEdges] = React.useState(INITIAL_EDGE_STATE);
+  const [connectors, setConnectors] = React.useState([]);
+  const [image] = useImage("https://svg-clipart.com/svg/blue/IH4nF93-blue-user-icon-vector.svg");
+
+  const [fromShapeId, setFromShapeId] = React.useState(null);
+  const [toShapeId, setToShapeId] = React.useState(null);
+
   const stageRef = useRef(null);
+
+  // const oldDblClickToConnect = (e) => {
+  //   if (fromShapeId) {
+  //     const newConnector = {
+  //       from: fromShapeId,
+  //       to: star.id,
+  //       id: connectors.length
+  //     };
+  //     setConnectors(connectors.concat([newConnector]));
+  //     setFromShapeId(null);
+  //   } else {
+  //     setFromShapeId(star.id);
+  //     setStars(prevStars => prevStars.map(star => ({...star, isDblClick: (star.id == e.target.id()) && !star.isDblClick })))
+  //   }
+  // }
 
   const handleDragStart = (e) => {
     const id = e.target.id();
@@ -28,45 +61,70 @@ const App = () => {
   };
 
   const handleDragEnd = (e) => {
-    setStars(
-      stars.map((star) => {
-        return {
-          ...star,
-          isDragging: false,
-        };
+
+    //if pulling a transparent / dummy node
+    if(e.target.fill() == "transparent"){
+      const closestStar = findClosestStar(e.target.position(), stars)
+      setStars(prevStars => {
+        const newStars = prevStars.filter(star => star.id != e.target.id());
+        setConnectors(prevConnectors => prevConnectors.map(conn => conn.to == e.target.id() ? {...conn, to: closestStar.id}: conn))
+        return newStars
       })
-    );
+    }
+    else{
+      setStars(
+        stars.map((star) => {
+          return {
+            ...star,
+            isDragging: false,
+          };
+        })
+      );
+    }
+   
   };
 
   const handleDragMove = (e) => {
     setStars(prevStars => {
-      const newStars = prevStars.map(star => star.id === e.target.id() ? {...star, ...e.target.position()} : star)
-      console.log(newStars)
+      const currStar = prevStars.find((star) => star.id == e.target.id())
+      // if (currStar.isDblClick == true){
+      //   console.log("dbl clc")
+      //   setConnectors(prevConnectors => prevConnectors.map(edge => ({to: {...e.target.position()}, from: {currStar}})))
+      // }
+      // else{
+      const newStars = prevStars.map(star => star.id === e.target.id() ? {...star, ...e.target.position(), isDragging: true} : star)
+      // console.log(newStars)
       return newStars
+      // }
+      // return prevStars
     })
   }
 
+  console.log("Connectors", connectors)
   return (
     <Stage width={window.innerWidth} height={window.innerHeight} ref={stageRef}>
       <Layer>
         <Text text="Try to drag a star" />
         <Circle
+          id={"parent"}
           name="draggableCircle"
           x={50}
           y={50}
           radius={25}
           fill="green"
           draggable
+          
           onDragEnd={(e) => {
             setStars((prevStars) => [
               ...prevStars,
               { id: prevStars.length.toString(),
                 x: e.target.x(),
                 y: e.target.y(),
-                fill: "blue",
+                // fill: "green",
                 radius: 10,
                 draggable: true,
-                isDragging: false, }
+                isDragging: false, 
+              }
             ]);
 
             var stage = stageRef.current;
@@ -74,26 +132,27 @@ const App = () => {
             draggableCircle.position({ x: 50, y: 50 });
           }}
         />
+
         {stars.map((star) => {
           return (
             <>
-              <Circle
+              <Image
+                image={image}
+                width={40}
+                height={40}
                 key={star.id}
                 id={star.id}
                 x={star.x}
                 y={star.y}
-                radius={20}
-                // numPoints={5}
-                // innerRadius={20}
-                // outerRadius={40}
-                offset={{x:0, y:-20}}
-                fill="#89b717"
+                // radius={20}
+                offset={{x:20, y:0}}
+                fill={star.fill || "#89b717"}
                 opacity={0.8}
                 draggable
                 rotation={star.rotation}
-                shadowColor="black"
+                shadowColor={star.isDblClick ? "red" : "black"}
                 shadowBlur={10}
-                shadowOpacity={0.6}
+                shadowOpacity={star.isDblClick ? 1 : 0.6}
                 shadowOffsetX={star.isDragging ? 10 : 5}
                 shadowOffsetY={star.isDragging ? 10 : 5}
                 scaleX={star.isDragging ? 1.2 : 1}
@@ -101,11 +160,45 @@ const App = () => {
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
                 onDragMove={handleDragMove}
+                onDblClick={(e) => {
+                  if (fromShapeId) {
+                    
+                    setFromShapeId(null);
+                    setToShapeId(null);
+                  } else {
+                    setFromShapeId(star.id);
+                    setToShapeId(stars.length.toString())
+                    setStars(prevStars => [...prevStars, {
+                      id: prevStars.length.toString(),
+                      ...e.target.position(),
+                      fill: "transparent",
+                      draggable: true,
+                      isDragging: false,
+                      isDblClick: false
+                    }])
+
+                    const newConnector = {
+                      from: star.id,
+                      to: stars.length.toString(),
+                      id: connectors.length
+                    };
+                    setConnectors(connectors.concat([newConnector]));
+                  }
+                }}
+                // onDblClick={e => setStars(prevStars => prevStars.map(star => ({...star, dblClick: star.id  == e.target.id()})))}
               />
             </>
           );
         })}
-        {_.combinations(stars, 2).map(([to,from]) => ({to, from})).map(({to,from}) => <Edge node1={to} node2={from}/>)}
+        {connectors.map(con => {
+          const from = stars.find(s => s.id === con.from);
+          const to = stars.find(s => s.id === con.to);
+
+          return (
+            <Edge node1={to} node2={from}/>
+          );
+        })}
+        {/* {edges.map(({to,from}) => <Edge node1={to} node2={from}/>)} */}
       </Layer>
     </Stage>
   );

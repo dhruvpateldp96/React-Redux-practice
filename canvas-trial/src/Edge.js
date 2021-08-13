@@ -48,27 +48,31 @@ const Edge = ({ node1, node2 }) => {
           (arrowStart.y + arrowEnd.y) / 2 
       };
     return (
-      <Line
-      draggable
+      <Arrow
+      zIndex={1}
+
+    //   draggable
         tension={0}
         points={[
-          arrowStart.x,
-          arrowStart.y,
-        //   arrowCurve.x,
-        //   arrowCurve.y,
-        arrowCurve1.x,
-        arrowCurve1.y,
-        arrowCurve2.x,
-        arrowCurve2.y,
-          // (arrowStart.x),
-          // (arrowStart.y+arrowEnd.y)/2,
-          // (arrowStart.x + arrowEnd.x)/2,
-          // (arrowStart.y + arrowEnd.y)/2,
-          arrowEnd.x,
-          arrowEnd.y
+            arrowStart.x,
+            arrowStart.y,
+            //   arrowCurve.x,
+            //   arrowCurve.y,
+            arrowCurve1.x,
+            arrowCurve1.y,
+            arrowCurve2.x,
+            arrowCurve2.y,
+            arrowEnd.x,
+            arrowEnd.y
         ]}
-        stroke="#000"
-        fill="#000"
+        stroke={(node1.isDragging || node2.isDragging) ? "#808080": "#000"}
+        shadowEnabled={true}
+        hadowColor="black"
+        shadowBlur={10}
+        shadowOpacity={0.6}
+        shadowOffsetX={(node1.isDragging || node2.isDragging) ? 10 : 5}
+        shadowOffsetY={(node1.isDragging || node2.isDragging) ? 10 : 5}
+        // fill="#000"
         strokeWidth={3}
         pointerWidth={6}
         sceneFunc= {function(ctx,shape){
